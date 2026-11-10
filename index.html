@@ -1,276 +1,204 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercise #1 - Responsive Layout</title>
-  <!-- โหลดฟอนต์ Sarabun ตามข้อกำหนดใน Figma -->
+  <title>Browse by Job Categories</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Sarabun', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      background-color: #f5f5f5;
+      background-color: #FAFAFA;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 40px 20px;
     }
 
-    /* Main Container Frame */
     .container {
       width: 100%;
-      max-width: 1440px;
-      background-color: #ffffff;
-      border: 5px solid #1400FF; /* สีกรอบตาม Figma */
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 1420px;
+      margin: 0 auto;
     }
 
-    /* Navbar Section */
-    .navbar {
-      width: 100%;
-      height: 92px;
-      background-color: #7BC678; /* สีเขียวตาม Figma */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 40px;
-      border-bottom: 5px solid #1400FF;
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .brand-box {
-      border: 3px solid #FF0000;
-      padding: 6px 16px;
-      background-color: transparent;
-    }
-
-    .brand-title {
-      font-size: 28px;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border: 3px solid #FF0000;
-      padding: 8px 16px;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 18px;
+    .section-title {
+      font-size: 32px;
       font-weight: 700;
+      color: #111827;
+      line-height: 1.2;
     }
 
-    .btn-login-nav {
-      background-color: #ffffff;
-      color: #7BC678;
-      padding: 6px 20px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 18px;
+    /* Grid Layout สำหรับ Desktop: 4 คอลัมน์ */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
 
-    /* Main Content Area */
-    .main-content {
-      padding: 60px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Registration Form Box */
-    .registration-form-box {
-      width: 100%;
-      max-width: 674px;
-      border: 5px solid #1400FF;
-      padding: 40px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .form-wrapper {
-      border: 3px solid #FF0000;
-      padding: 30px 20px;
+    /* Category Card ทั่วไป */
+    .category-card {
+      background-color: #FFFFFF;
+      border-radius: 12px;
+      padding: 32px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .form-title {
-      font-size: 36px;
-      font-weight: 800;
-      color: #7BC678;
-      margin-bottom: 30px;
       text-align: center;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    /* Input Fields */
-    .input-group {
-      width: 100%;
-      max-width: 370px;
-      border: 3px solid #FF0000;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-sizing: border-box;
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .input-label {
-      display: block;
-      color: #7BC678;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #A8A6A6;
-      border-radius: 5px;
-      outline: none;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .input-field::placeholder {
-      color: #BDBDBD;
-    }
-
-    /* Action Button */
-    .btn-container {
-      width: 100%;
-      max-width: 370px;
+    .icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #FFF4EC;
       display: flex;
       justify-content: center;
-      margin-top: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 24px;
     }
 
-    .btn-submit {
-      width: 154px;
-      height: 52px;
-      background-color: #7BC678;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.2s;
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 8px;
     }
 
-    .btn-submit:hover {
-      background-color: #68b065;
+    .card-subtitle {
+      font-size: 14px;
+      color: #6B7280;
+    }
+
+    /* Action Card สีส้มแบบพิเศษ */
+    .category-card.featured {
+      background-color: #FF6B4A;
+      color: #FFFFFF;
+      justify-content: center;
+    }
+
+    .category-card.featured .card-title {
+      color: #FFFFFF;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .category-card.featured .card-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
     }
 
     /* ========================================================
        Responsive Layout: Mobile Screen (Width <= 768px)
        ======================================================== */
     @media (max-width: 768px) {
-      .navbar {
-        height: auto;
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
+      body {
+        padding: 24px 16px;
       }
 
-      .brand-box, .nav-links {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 24px;
       }
 
-      .nav-links {
-        flex-wrap: wrap;
+      /* เปลี่ยนการจัดวางเป็น 1 คอลัมน์เรียงต่อกันยาวลงมา */
+      .category-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
-      .main-content {
-        padding: 20px 10px;
-      }
-
-      .registration-form-box {
-        padding: 15px;
-      }
-
-      .form-wrapper {
-        padding: 20px 10px;
-      }
-
-      .form-title {
-        font-size: 28px;
-        margin-bottom: 20px;
-      }
-
-      .input-group {
-        max-width: 100%;
-      }
-
-      .btn-submit {
-        width: 100%;
+      .category-card {
+        padding: 24px 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Main Figma Container -->
   <div class="container">
     
-    <!-- Navbar Header -->
-    <header class="navbar">
-      <div class="brand-box">
-        <h1 class="brand-title">E-Commerce</h1>
-      </div>
-      <nav class="nav-links">
-        <a href="#" class="nav-link">Register</a>
-        <a href="#" class="btn-login-nav">Login</a>
-        <a href="#" class="nav-link">About Us</a>
-      </nav>
+    <!-- Section Header -->
+    <header class="section-header">
+      <h2 class="section-title">Browse by<br>Job Categories</h2>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-      
-      <!-- Registration / Login Outer Box -->
-      <div class="registration-form-box">
-        <div class="form-wrapper">
-          
-          <h2 class="form-title">Login Form</h2>
-          
-          <!-- Username Input -->
-          <div class="input-group">
-            <label class="input-label" for="username">Username</label>
-            <input type="text" id="username" class="input-field" placeholder="Enter username here">
-          </div>
+    <!-- Categories Grid Container -->
+    <main class="category-grid">
 
-          <!-- Password Input -->
-          <div class="input-group">
-            <label class="input-label" for="password">Password</label>
-            <input type="password" id="password" class="input-field" placeholder="Enter password here">
-          </div>
+      <!-- Item 1 -->
+      <div class="category-card">
+        <div class="icon-wrapper">📢</div>
+        <h3 class="card-title">Digital Marketing</h3>
+        <p class="card-subtitle">140 Jobs Opened</p>
+      </div>
 
-          <!-- Submit Button -->
-          <div class="btn-container">
-            <button class="btn-submit" type="button">Log In</button>
-          </div>
+      <!-- Item 2 -->
+      <div class="category-card">
+        <div class="icon-wrapper">✏️</div>
+        <h3 class="card-title">Art & Design</h3>
+        <p class="card-subtitle">85 Jobs Opened</p>
+      </div>
 
-        </div>
+      <!-- Item 3 -->
+      <div class="category-card">
+        <div class="icon-wrapper">💲</div>
+        <h3 class="card-title">Accounting</h3>
+        <p class="card-subtitle">92 Jobs Opened</p>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="category-card">
+        <div class="icon-wrapper">📷</div>
+        <h3 class="card-title">Photography</h3>
+        <p class="card-subtitle">45 Jobs Opened</p>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="category-card">
+        <div class="icon-wrapper">📝</div>
+        <h3 class="card-title">Copy Writing</h3>
+        <p class="card-subtitle">112 Jobs Opened</p>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="category-card">
+        <div class="icon-wrapper">🎧</div>
+        <h3 class="card-title">Music</h3>
+        <p class="card-subtitle">38 Jobs Opened</p>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="category-card">
+        <div class="icon-wrapper">🤝</div>
+        <h3 class="card-title">Human Resources</h3>
+        <p class="card-subtitle">64 Jobs Opened</p>
+      </div>
+
+      <!-- Item 8 (Featured Orange Card) -->
+      <div class="category-card featured">
+        <h3 class="card-title">Explore<br>30 More<br>Categories</h3>
       </div>
 
     </main>
